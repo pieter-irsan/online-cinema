@@ -27,13 +27,13 @@ else if (ViewBag.Alert != null)
 </div>
 }
 
-<div class="row">
-    <div class="col">
+<div class="row justify-content-between">
+    <div class="col-3">
         <a class="btn btn-primary" href="@Url.Action("Add")">
             Add Movie
         </a>
     </div>
-    <div class="col">
+    <div class="col-4">
         <form onsubmit="window.location = '/Movie/Search/?param=' + search.value; return false;">
             <div class="input-group mb-1">
                 <input id="search" placeholder="Search Movies" type="search" name="search" class="form-control">

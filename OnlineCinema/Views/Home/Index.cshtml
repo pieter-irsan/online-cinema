@@ -1,0 +1,62 @@
+﻿@model IEnumerable<OnlineCinema.Models.MovieModel>
+@{ViewBag.Title = "| Home";}
+
+@if (ViewBag.Alert != null)
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>@ViewBag.Alert</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="row pt-4">
+    @if (TempData.ContainsKey("Alert"))
+    {
+        <div class="offset-md-4 col-md-4">
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>@TempData["Alert"]</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    }
+    @if (TempData.ContainsKey("Success"))
+    {
+        <div class="offset-md-4 col-md-4">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>@TempData["Success"]</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="w-auto mb-4 text-white bg-secondary bg-gradient shadow rounded-3">
+    <div class="container-fluid py-5">
+        <h1 class="text-center">Online Cinema</h1>
+        <p class="lead">Online Cinema is a place where you can watch all of your favorite award-winning blockbuster movies. 
+        All movies are available all in one place and we give them to you exclusively at a very low price!</p>
+    </div>
+</div>
+
+<div class="row row-cols-2 g-3 row-cols-md-4 g-md-3">
+    @foreach (var movie in Model)
+    {
+        <div class="col-3">
+            <div class="card shadow-sm" style="cursor: pointer;" onclick="window.location='@Url.Action("Movie", "Home", new { id = movie.Id })';">
+                <div class="card-body text-center">
+                    @if (movie.PosterPath != null)
+                    {
+                        <img src="@Url.Content(movie.PosterPath)" class="card-img-top" />
+                    }
+                    <h5 class="card-title">@Html.DisplayFor(modelItem => movie.Title)</h5>
+                    <h6 class="card-subtitle text-muted">@Html.DisplayFor(modelItem => movie.Director)</h6>
+                    @*<p class="card-text">@Html.DisplayFor(modelItem => movie.Synopsis)</p>
+                    <div class="input-group">
+                        <span class="input-group-text btn-success">@Html.DisplayFor(modelItem => movie.Price)</span>
+                        <a class="btn btn-primary" type="button" href="@Url.Action("Movie", "Home", new { id = movie.Id, title = movie.Title })">Buy</a>
+                    </div>*@
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,99 @@
+﻿@model IEnumerable<OnlineCinema.Models.MovieModel>
+@{ViewBag.Title = "| Movie Database";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";}
+
+<h2>Online Cinema Movie Database</h2>
+<hr />
+@if (ViewBag.Success != null)
+{
+    <div class="row">
+        <div class="offset-md-4 col-md-4">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>@ViewBag.Success</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+}
+else if (ViewBag.Alert != null)
+{
+<div class="row d-flex justify-content-between">
+    <div class="offset-md-4 col-md-4">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>@ViewBag.Alert</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+}
+
+<div class="row">
+    <div class="col">
+        <a class="btn btn-primary" href="@Url.Action("Add")">
+            Add Movie
+        </a>
+    </div>
+    <div class="col">
+        <form onsubmit="window.location = '/Movie/Search/?param=' + search.value; return false;">
+            <div class="input-group mb-1">
+                <input id="search" placeholder="Search Movies" type="search" name="search" class="form-control">
+                <button type="submit" value="Send" class="btn btn-success">Search</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(movie => movie.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(movie => movie.Director)
+        </th>
+        <th>
+            @Html.DisplayNameFor(movie => movie.Synopsis)
+        </th>
+        <th>
+            @Html.DisplayNameFor(movie => movie.Price) (Rp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(movie => movie.Poster)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var movie in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => movie.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => movie.Director)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => movie.Synopsis)
+            </td>
+            <td>
+                @Html.ValueFor(modelItem => movie.Price)
+            </td>
+            <td>
+                @if (!string.IsNullOrWhiteSpace(movie.PosterPath))
+                {
+                    <img src="@Url.Content(movie.PosterPath)" style="width:200px; height:auto;" />
+                }
+            </td>
+            <td>
+                <div>
+                    <a class="btn btn-info mb-1" href="@Url.Action("Edit", "Movie", new { id = movie.Id })">
+                        <img src="~/Content/pencil-square.svg" alt="Edit" width="19" height="19">
+                    </a>
+                    <a class="btn btn-danger" onclick="return confirm('Are you sure you want to delete?')" type="button" href="@Url.Action("Delete", "Movie", new { id = movie.Id, posterPath = movie.PosterPath })">
+                        <img src="~/Content/trash.svg" alt="Delete" width="19" height="19">
+                    </a>
+                </div>
+            </td>
+        </tr>
+    }
+</table>

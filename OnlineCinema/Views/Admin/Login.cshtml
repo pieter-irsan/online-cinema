@@ -1,0 +1,50 @@
+﻿@model OnlineCinema.Models.AdminModel
+@{Layout = null;}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Cinema | OCMS Login</title>
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/site.css" />
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container body-content">
+        <h2>Online Cinema Management System</h2>
+        <hr />
+        @if (TempData.ContainsKey("Alert"))
+        {
+            <div class="offset-md-4 col-md-4">
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>@TempData["Alert"]</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        }
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+
+            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+        
+            <input type="submit" value="Login" class="btn btn-primary mt-2" />
+            <h3 class="text-danger">@ViewBag.Message</h3>
+        }
+        <a class="btn btn-secondary" type="button" href="@Url.Action("Index", "Home")">Home</a>
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Online Cinema</p>
+        </footer>
+    </div>
+</body>
+</html>

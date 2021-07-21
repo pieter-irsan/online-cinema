@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCMS @ViewBag.Title</title>
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/site.css" />
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</head> 
+<body>
+    <nav class="navbar navbar-dark bg-dark fixed-top navbar-expand-md">
+        <div class="container-fluid">
+            <i>@Html.ActionLink("Online Cinema Management System", "Index", "Admin", new { area = "" }, new { @class = "navbar-brand" })</i>
+            @if (Session["Admin"] != null)
+            {
+                <h5 class="navbar-text text-light">
+                    <i class="text-secondary">Currently logged in as: </i><b>@Session["Admin"].ToString()</b>
+                </h5>
+            }
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="d-md-flex justify-content-md-end">
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <ul class="navbar-nav me-2 mb-lg-0">
+                        <li class="nav-item me-1">
+                            @Html.ActionLink("Dashboard", "Index", "Admin", null, new { @class = "btn btn-outline-light" })
+                        </li>
+                        <li class="nav-item me-1">
+                            @Html.ActionLink("Movies", "Index", "Movie", null, new { @class = "btn btn-outline-light" })
+                        </li>
+                        <li class="nav-item me-1">
+                            @Html.ActionLink("Transactions", "Index", "Purchase", null, new { @class = "btn btn-outline-light" })
+                        </li>
+                        <li class="nav-item me-1">
+                            @if (Session["Admin"] != null)
+                            {
+                                @Html.ActionLink("Logout", "Logout", "Admin", "", new { @class = "btn btn-outline-danger" })
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Login", "Login", "Admin", "", new { @class = "btn btn-outline-light" })
+                            }
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+</nav>
+
+    <div class="container body-content pt-5">
+
+        @RenderBody()
+
+        <hr class="mt-5" />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Online Cinema</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,14 @@
+﻿@{Layout = "~/Views/Shared/_AdminLayout.cshtml";}
+
+<p><h1>Online Cinema Management System</h1></p>
+
+<h5>Manage the Online Cinema <b>Movie</b> and <b>Transaction</b> Database</h5>
+@if (ViewBag.Success != null)
+{
+    <div class="offset-md-4 col-md-4">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>@ViewBag.Success</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+}

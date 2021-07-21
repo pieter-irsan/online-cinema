@@ -1,0 +1,48 @@
+﻿@model OnlineCinema.Models.UserModel
+@{ViewBag.Title = "| Register";}
+
+<h4>Register to Online Cinema</h4>
+<hr />
+@if (ViewBag.Alert != null)
+{
+    <div class="offset-md-4 col-md-4">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>@ViewBag.Alert</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+}
+@if (ViewBag.Success != null)
+{
+    <div class="offset-md-4 col-md-4">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>@ViewBag.Success</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
+    @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+    <span class="text-danger">@ViewBag.Taken</span>
+
+    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+
+    <input type="submit" value="Register" class="btn btn-primary mt-2" />
+}
+<p>Already have an account? You can directly log in to Online Cinema</p>
+<div class="row">
+    <div class="col-1">
+        <a class="btn btn-secondary" type="button" href="@Url.Action("Index", "Home")">Home</a>
+    </div>
+    <div class="col-1">
+        <a class="btn btn-success" type="button" href="@Url.Action("Login", "User")">Login</a>
+    </div>
+</div>

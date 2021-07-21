@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Cinema @ViewBag.Title</title>
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/site.css" />
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</head> 
+<body>
+    <nav class="navbar navbar-dark bg-dark fixed-top navbar-expand-md">
+        <div class="container-fluid">
+            <i>@Html.ActionLink("Online Cinema", "Index", "Home", null, new { @class = "navbar-brand" })</i>
+            @if (Session["User"] != null)
+            {
+                <h5 class="navbar-text text-light">
+                    <i class="text-secondary">Currently logged in as: </i><b>@Session["User"].ToString()</b>
+                </h5>
+            }
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="d-md-flex justify-content-md-end">
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <div class="navbar-nav me-2 mb-lg-0">
+                        <a class="nav-item me-1 mb-1">
+                            @Html.ActionLink("Home", "Index", "Home", null, new { @class = "btn btn-outline-light" })
+                        </a>
+                        <a class="nav-item me-1 mb-1">
+                            @if (Session["User"] != null)
+                            {
+                                @Html.ActionLink("My Movies", "Movie", "User", null, new { @class = "btn btn-outline-light" })
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Register", "Register", "User", null, new { @class = "btn btn-outline-light" })
+                            }
+                        </a>
+                        <a class="nav-item me-1 mb-1">
+                            @if (Session["User"] != null)
+                            {
+                                @Html.ActionLink("Logout", "Logout", "User", null, new { @class = "btn btn-outline-danger" })
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Login", "Login", "User", null, new { @class = "btn btn-outline-light" })
+                            }
+                        </a>
+                    </div>
+                    <form onsubmit="window.location = '/Home/Search/?param=' + search.value; return false;" class="mt-1">
+                        <div class="input-group mb-1">
+                            <input id="search" placeholder="Search Movies" type="search" name="search" class="form-control">
+                            <button type="submit" value="Send" class="btn btn-success">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content pt-4">
+
+        @RenderBody()
+
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Online Cinema</p>
+            <a class="btn btn-outline-dark" href="/Admin/Login">OCMS &raquo;</a>
+        </footer>
+    </div>
+</body>
+</html>

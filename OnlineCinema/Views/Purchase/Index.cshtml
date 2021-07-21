@@ -1,0 +1,47 @@
+﻿@model IEnumerable<OnlineCinema.Models.PurchaseModel>
+@{ViewBag.Title = "| Transaction Log";
+  Layout = "~/Views/Shared/_AdminLayout.cshtml";}
+
+<h2>Online Cinema Transaction Database</h2>
+<hr />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(purchase => purchase.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(purchase => purchase.Username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(purchase => purchase.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(purchase => purchase.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(purchase => purchase.Time)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var purchase in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => purchase.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => purchase.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => purchase.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => purchase.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => purchase.Time)
+            </td>
+        </tr>
+    }
+</table>

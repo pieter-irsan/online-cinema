@@ -1,0 +1,37 @@
+﻿@model OnlineCinema.Models.MovieModel
+@{ViewBag.Title = "| " + Html.DisplayFor(movie => movie.Title);}
+
+<div class="row">
+    <div class="col-md-3 text-center">
+        @if (Model.PosterPath != null)
+        {
+            <img src="@Url.Content(Html.DisplayFor(movie => movie.PosterPath).ToString())" class="w-100" />
+        }
+        <h3>@Html.DisplayFor(movie => movie.Title)</h3>
+        <h4 class="text-muted">@Html.DisplayFor(movie => movie.Director)</h4>
+        <br />
+        <div class="input-group justify-content-center">
+            <span class="input-group-text btn-outline-primary">@Html.DisplayFor(movie => movie.Price)</span>
+            <a class="btn btn-success" type="button" href="@Url.Action("Details", "Purchase", new { id = Model.Id })">Buy Now</a>
+        </div>
+        <br />
+    </div>
+    <div class="offset-md-2 col-md-7">
+        @*<h2><b>@Html.DisplayFor(movie => movie.Title)</b></h2>
+        <hr />
+        <p><b>Director</b>: @Html.DisplayFor(movie => movie.Director)</p>*@
+        <p class="fs-5"><b>Synopsis</b></p>
+        <p class="fs-6">@Html.DisplayFor(movie => movie.Synopsis)</p>
+        <p class="fs-5"><b>Trailer</b></p>
+        <p>
+            @if(Model.Trailer != null)
+            {
+            <div class="ratio ratio-16x9">
+                <iframe src="@Html.DisplayFor(movie => movie.Trailer)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            }
+        </p>
+        @*<p><b>Price</b>: @Html.DisplayFor(movie => movie.Price)</p>
+        <p>@Html.ActionLink("Buy Now", "Details", "Purchase", new { id = Model.Id }, new { @class = "btn btn-primary" })</p>*@
+    </div>
+</div>

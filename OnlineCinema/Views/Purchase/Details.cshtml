@@ -1,6 +1,34 @@
 ﻿@model OnlineCinema.Models.MovieModel
 @{ViewBag.Title = "| Buy " + Model.Title;}
 
+<h2> Buying: <b>@Model.Title</b></h2>
+<hr />
+<form action="Details" method="post">
+    @Html.AntiForgeryToken()
+    <h4 class="text-muted">Purchase details:</h4>
+
+    <table>
+        <tr>
+            <td><b>Username</b>:</td>
+            <td><input type="text" name="username" class="form-control" value="@Session["User"].ToString()" readonly /></td>
+        </tr>
+        <tr>
+            <td><b>Title</b>:</td>
+            <td><input type="text" name="title" class="form-control" value="@Model.Title" readonly /></td>
+        </tr>
+        <tr>
+            <td><b>Price</b>:</td>
+            <td><input type="number" name="price" class="form-control" value="@Model.Price" readonly /></td>
+        </tr>
+        <tr>
+            <td><b>Time</b>:</td>
+            <td><input type="datetime" name="time" class="form-control" value="@DateTime.Now" readonly /></td>
+        </tr>
+        <tr>
+            <td class="pt-2"><input type="submit" value="Buy Now" class="btn btn-success" /></td>
+        </tr>
+    </table>
+</form>
 @if (TempData["Alert"] != null)
 {
     <div class="offset-md-4 col-md-4">
@@ -10,48 +38,3 @@
         </div>
     </div>
 }
-
-<div class="row">
-    <div class="col-md-3 text-center">
-        @if (Model.PosterPath != null)
-        {
-            <img src="@Url.Content(Html.DisplayFor(movie => movie.PosterPath).ToString())" class="w-100" />
-        }
-        <br />
-    </div>
-    <div class="offset-md-1 col-md-8">
-        <h2> Buying: <b>@Model.Title</b></h2>
-        <form action="Details" method="post">
-            @Html.AntiForgeryToken()
-            <h4 class="text-muted">Purchase details:</h4>
-
-            <table>
-                <tr>
-                    <td><b>Username</b>:</td>
-                    <td><input type="text" name="username" class="form-control" value="@Session["User"].ToString()" readonly /></td>
-                </tr>
-                <tr>
-                    <td><b>Title</b>:</td>
-                    <td><input type="text" name="title" class="form-control" value="@Model.Title" readonly /></td>
-                </tr>
-                <tr>
-                    <td><b>Price</b>:</td>
-                    <td><input type="number" name="price" class="form-control" value="@Model.Price" readonly /></td>
-                </tr>
-                <tr>
-                    <td><b>Time</b>:</td>
-                    <td><input type="datetime" name="time" class="form-control" value="@DateTime.Now" readonly /></td>
-                </tr>
-                <tr>
-                    <td>
-                        <br />
-                        <div class="input-group justify-content-center">
-                            <span class="input-group-text btn-outline-primary">@Html.DisplayFor(movie => movie.Price)</span>
-                            <input type="submit" class="btn btn-success" />
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </form>
-    </div>
-</div>

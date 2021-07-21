@@ -4,23 +4,6 @@
 
 <h2>Online Cinema Transaction Database</h2>
 <hr />
-
-<div class="row justify-content-between">
-    <div class="col-5">
-        <span class="btn btn-outline-success">
-            Total Revenue: Rp @ViewBag.Revenue
-        </span>
-    </div>
-    <div class="col-4">
-        <form onsubmit="window.location = '/Purchase/Search/?param=' + search.value; return false;">
-            <div class="input-group mb-1">
-                <input id="search" placeholder="Search Transaction" type="search" name="search" class="form-control">
-                <button type="submit" value="Send" class="btn btn-success">Search</button>
-            </div>
-        </form>
-    </div>
-</div>
-
 <table class="table">
     <tr>
         <th>

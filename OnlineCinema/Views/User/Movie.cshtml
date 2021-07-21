@@ -6,18 +6,16 @@
     <hr />
 </div>
 
-<div class="row row-cols-2 g-3 row-cols-md-4 g-md-3">
+<div class="row">
     @foreach (var movie in Model)
     {
-        <div class="col-3">
+        <div class="col-md-3 mb-4">
             <div class="card shadow-sm">
-                <div class="card-body text-center">
-                    @if (movie.PosterPath != null)
-                    {
-                        <img src="@Url.Content(movie.PosterPath)" class="card-img-top" />
-                    }
-                    <h5 class="card-title">@Html.DisplayFor(modelItem => movie.Title)</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => movie.Director)</h6>
+                <div class="card-body">
+                    <img src="@Url.Content(movie.PosterPath)" class="card-img-top" />
+                    <h3 class="card-title">@Html.DisplayFor(modelItem => movie.Title)</h3>
+                    <h5 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => movie.Director)</h5>
+                    <p class="card-text">@Html.DisplayFor(modelItem => movie.Synopsis)</p>
                     <button type="button" class="form-control btn btn-success">Watch Now</button>
                 </div>
             </div>

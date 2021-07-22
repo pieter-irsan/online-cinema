@@ -16,22 +16,17 @@
         </div>
         <br />
     </div>
-    <div class="offset-md-2 col-md-7">
-        @*<h2><b>@Html.DisplayFor(movie => movie.Title)</b></h2>
-        <hr />
-        <p><b>Director</b>: @Html.DisplayFor(movie => movie.Director)</p>*@
+    <div class="offset-md-1 col-md-8">
         <p class="fs-5"><b>Synopsis</b></p>
         <p class="fs-6">@Html.DisplayFor(movie => movie.Synopsis)</p>
         <p class="fs-5"><b>Trailer</b></p>
         <p>
-            @if(Model.Trailer != null)
+            @if (Model.Trailer != null)
             {
-            <div class="ratio ratio-16x9">
-                <iframe src="@Html.DisplayFor(movie => movie.Trailer)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
+                <div class="ratio ratio-16x9">
+                    <iframe src="@Html.DisplayFor(movie => movie.Trailer)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
             }
         </p>
-        @*<p><b>Price</b>: @Html.DisplayFor(movie => movie.Price)</p>
-        <p>@Html.ActionLink("Buy Now", "Details", "Purchase", new { id = Model.Id }, new { @class = "btn btn-primary" })</p>*@
     </div>
 </div>

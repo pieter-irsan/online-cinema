@@ -14,25 +14,23 @@
     <h2>Search Results</h2>
     <hr />
 </div>
-<div class="row">
+<div class="row row-cols-2 g-3 row-cols-md-4 g-md-3">
     @if (Model != null)
     {
         foreach (var movie in Model)
         {
-            <div class="col-md-3 mb-4">
-                <div class="card shadow-sm">
-                    <div class="card-body">
+            <div class="col-3">
+            <div class="card shadow-sm" style="cursor: pointer;" onclick="window.location='@Url.Action("Movie", "Home", new { id = movie.Id })';">
+                <div class="card-body text-center">
+                    @if (movie.PosterPath != null)
+                    {
                         <img src="@Url.Content(movie.PosterPath)" class="card-img-top" />
-                        <h3 class="card-title">@Html.DisplayFor(modelItem => movie.Title)</h3>
-                        <h5 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => movie.Director)</h5>
-                        <p class="card-text">@Html.DisplayFor(modelItem => movie.Synopsis)</p>
-                        <div class="input-group">
-                            <span class="input-group-text btn-success">@Html.DisplayFor(modelItem => movie.Price)</span>
-                            <a class="btn btn-primary" type="button" href="@Url.Action("Movie", "Home", new { id = movie.Id, title = movie.Title })">Buy</a>
-                        </div>
-                    </div>
+                    }
+                    <h5 class="card-title">@Html.DisplayFor(modelItem => movie.Title)</h5>
+                    <h6 class="card-subtitle text-muted">@Html.DisplayFor(modelItem => movie.Director)</h6>
                 </div>
             </div>
+        </div>
         }
     }
     else

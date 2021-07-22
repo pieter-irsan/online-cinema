@@ -100,7 +100,9 @@ namespace OnlineCinema.Models
             string query = "SELECT SUM(Price) FROM Purchase";
             using (IDbCommand command = new SqlCommand(query, cinemaDb))
             {
+                cinemaDb.Open();
                 object result = command.ExecuteScalar();
+                cinemaDb.Close();
                 return Convert.ToString(result);
             }
         }

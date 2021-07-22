@@ -18,6 +18,7 @@ namespace OnlineCinema.Controllers
             {
                 PurchaseDbHandler dbHandler = new PurchaseDbHandler();
                 ModelState.Clear();
+                ViewBag.Revenue = dbHandler.Revenue();
                 return View(dbHandler.GetPurchase());
             }
         }
@@ -84,6 +85,7 @@ namespace OnlineCinema.Controllers
             {
                 PurchaseDbHandler dbHandler = new PurchaseDbHandler();
                 ModelState.Clear();
+                ViewBag.Revenue = dbHandler.Revenue();
                 return View(dbHandler.SearchPurchase(param));
             }
             catch

@@ -26,6 +26,7 @@ namespace OnlineCinema.Models
 
         public HttpPostedFileBase Poster { get; set; }
 
+        [Required(ErrorMessage = "Trailer is required")]
         public string Trailer { get; set; }
     }
 }
